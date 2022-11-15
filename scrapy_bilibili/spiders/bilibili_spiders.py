@@ -15,7 +15,7 @@ import requests
 # https://s.search.bilibili.com/cate/search?main_ver=v3&search_type=video&view_type=hot_rank&copy_right=-1&new_web_tag=1&order=click&cate_id=201&page=1&pagesize=50&time_from=20221006&time_to=20221113
 # "numPages": 5294,"numResults": 264681,"crr_query": "","pagesize": 50,"suggest_keyword": "","egg_info": null,"cache": 0,"exp_bits": 1,"exp_str": "","seid": "13218235806365448668","msg": "success","egg_hit": 0,"page": 1
 
-# 5581
+# 6450
 
 class BilibiliSpider(Spider):
     # Spider名字
@@ -35,14 +35,21 @@ class BilibiliSpider(Spider):
         # 视频列表链接模版 （一个参数）
         self.url = self.url_fmt.format(rid=rid, ps=ps, pn='{}')
         # 初始链接
-        self.start_urls = [self.url.format(1909)]
+        self.start_urls = [self.url.format(6450)]
 
     def parse(self, response):
         """页面解析"""
         def get_tags(aid, cid):
-            url = f"https://api.bilibili.com/x/web-interface/view/detail/tag?aid={aid}&cid={cid}"
-            res = requests.get(url).json()['data']
-            tag = ','.join([t['tag_name'] for t in res])
+            tag = ""
+            try:
+                url = f"https://api.bilibili.com/x/web-interface/view/detail/tag?aid={aid}&cid={cid}"
+                r = requests.get(url, stream=True, verify=False, timeout=(5, 5))
+                res = r.json()['data']
+                tag = ','.join([t['tag_name'] for t in res])
+            except requests.exceptions.ConnectionError:
+                r.status_code = "Connection refused"
+            except Exception as e:
+                print(url, e)
             return tag
 
         url = response.url

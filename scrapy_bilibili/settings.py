@@ -14,21 +14,24 @@ NEWSPIDER_MODULE = 'scrapy_bilibili.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'scrapy_bilibili (+http://www.yourdomain.com)'
+USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 Edg/107.0.1418.42'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
 
+LOG_LEVEL = 'DEBUG'
+LOG_FILE = '.logs/20221115.log'
+
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-CONCURRENT_REQUESTS = 100
+CONCURRENT_REQUESTS = 256
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
 DOWNLOAD_DELAY = 0
 # The download delay setting will honor only one of:
-CONCURRENT_REQUESTS_PER_DOMAIN = 100
-CONCURRENT_REQUESTS_PER_IP = 100
+CONCURRENT_REQUESTS_PER_DOMAIN = 256
+CONCURRENT_REQUESTS_PER_IP = 256
 
 # Disable cookies (enabled by default)
 COOKIES_ENABLED = False
