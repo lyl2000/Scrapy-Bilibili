@@ -21,10 +21,7 @@ class BilibiliPipeline:
         self.set = self.redis.getSet('bilibili_video_list')
 
     def process_item(self, item, spider):
-        """处理Item对象
-
-            对Item对象用Redis的Set进行去重，然后存入MongoDB。
-        """
+        """对Item对象用Redis的Set进行去重 然后存入MongoDB"""
 
         bvid = item['bvid']  # 视频ID
         if bvid not in self.set:  # 如果视频ID不在集合中

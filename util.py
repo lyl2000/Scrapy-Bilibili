@@ -17,19 +17,9 @@ def str_list(s: str, sep: str=None) -> List[str]:
     return [i.strip() for i in s.split(sep)]
 
 
-def json2obj(s: str, enc: str=None):
-    """json字符串 -> Python对象
-
-    Args:
-        s: 输入的json字符串
-        enc: 字符串编码格式，默认UTF-8
-
-    Returns:
-        Python对象
-    """
-
-    if enc is None: enc = 'UTF-8'
-    return json.loads(s, encoding=enc)
+def json2obj(s: str):
+    """json字符串 -> Python对象"""
+    return json.loads(s)
 
 
 def obj2json(x, show: bool=None) -> str:

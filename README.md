@@ -36,3 +36,13 @@ Windows系统下Redis可以用Memurai代替。
     scrapy crawl BilibiliSpider -a rid=17
 
 其中`rid`是区ID。
+
+
+    show dbs
+    use bilibili
+    db.getCollection('video_list').find({}).count()
+
+    redis-cli
+    SMEMBERS bilibili_video_list
+
+
